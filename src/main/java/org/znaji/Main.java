@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Discount newYearDiscount = price -> price * 0.9;
-        Discount christmasDiscount = price -> price * 0.8;
-        Discount aidilfitriDiscount = price -> price * 0.7;
+        DiscountStrategy newYearDiscountStrategy = price -> price * 0.9;
+        DiscountStrategy christmasDiscountStrategy = price -> price * 0.8;
+        DiscountStrategy aidilfitriDiscountStrategy = price -> price * 0.7;
 
-        List<Discount> discounts = List.of(newYearDiscount, christmasDiscount, aidilfitriDiscount);
+        List<DiscountStrategy> discountStrategies = List.of(newYearDiscountStrategy, christmasDiscountStrategy, aidilfitriDiscountStrategy);
 
-        Discount totalDiscount = discounts.stream()
-                .reduce(p -> p, Discount::combine);
+        DiscountStrategy totalDiscountStrategy = discountStrategies.stream()
+                .reduce(p -> p, DiscountStrategy::combine);
 
-        System.out.println(totalDiscount.apply(100.0));
+        System.out.println(totalDiscountStrategy.apply(100.0));
 
         TextProcessorStrategy reverse = text -> new StringBuilder(text).reverse().toString();
         TextProcessorStrategy uppercase = String::toUpperCase;
